@@ -1,0 +1,65 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python scripts/prepare.py
+    deps:
+    - path: datasets/CAR_DETAILS_FROM_CAR_DEKHO.csv
+      hash: md5
+      md5: 6837df3951bb370d6b95c05883037726
+      size: 325663
+    - path: datasets/Car_data.csv
+      hash: md5
+      md5: b1fddc19227abae7473082d60dfabc73
+      size: 15857
+    - path: datasets/Car_details_v3.csv
+      hash: md5
+      md5: 70c521fb83f383f120a27b3904c6fdcc
+      size: 976332
+    - path: scripts/prepare.py
+      hash: md5
+      md5: c019457a82a88b69b358a551f5afd796
+      size: 2881
+    outs:
+    - path: output/prepareOutput/
+      hash: md5
+      md5: 59fe834dd831c236005ad91310cb4bf4.dir
+      size: 4023195
+      nfiles: 5
+  analyzeData:
+    cmd: python scripts/analyze.py
+    deps:
+    - path: output/prepareOutput/normalized.csv
+      hash: md5
+      md5: e93122d9e0bf9206ae4c053bac310d41
+      size: 1314200
+    - path: scripts/analyze.py
+      hash: md5
+      md5: 3b203540145a69bc1009c0dc92bfb529
+      size: 1020
+    outs:
+    - path: output/analyzeOutput/
+      hash: md5
+      md5: 9f275cbf3db446b0d46eea30ae6f71d8.dir
+      size: 2398
+      nfiles: 1
+  train_linear:
+    cmd: python scripts/train_linear.py
+    deps:
+    - path: preparedData
+      hash: md5
+      md5: 59fe834dd831c236005ad91310cb4bf4.dir
+      size: 4023195
+      nfiles: 5
+    - path: scripts/train_linear.py
+      hash: md5
+      md5: f0803ec6c39039763ad8c8f4012f3f47
+      size: 1664
+    outs:
+    - path: metrics_linear.json
+      hash: md5
+      md5: 89f3652ba067d818d582abd0f9120e91
+      size: 84
+    - path: models/linear_model.joblib
+      hash: md5
+      md5: b1c941e08090e30a52cda25c4f034e25
+      size: 977

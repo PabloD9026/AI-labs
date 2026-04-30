@@ -1,0 +1,24 @@
+cmd: python scripts/prepare.py
+deps:
+- path: datasets/CAR_DETAILS_FROM_CAR_DEKHO.csv
+  hash: md5
+  md5: 6837df3951bb370d6b95c05883037726
+  size: 325663
+- path: datasets/Car_data.csv
+  hash: md5
+  md5: b1fddc19227abae7473082d60dfabc73
+  size: 15857
+- path: datasets/Car_details_v3.csv
+  hash: md5
+  md5: 70c521fb83f383f120a27b3904c6fdcc
+  size: 976332
+- path: scripts/prepare.py
+  hash: md5
+  md5: a30faa68a037821fb025464adf4947f0
+  size: 2817
+outs:
+- path: preparedData
+  hash: md5
+  md5: 59fe834dd831c236005ad91310cb4bf4.dir
+  size: 4023195
+  nfiles: 5

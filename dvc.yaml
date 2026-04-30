@@ -1,0 +1,27 @@
+stages:
+  prepare:
+    cmd: python scripts/prepare.py
+    deps:
+    - datasets/CAR_DETAILS_FROM_CAR_DEKHO.csv
+    - datasets/Car_data.csv
+    - datasets/Car_details_v3.csv
+    - scripts/prepare.py
+    outs:
+    - output/prepareOutput/
+  analyzeData:
+    cmd: python scripts/analyze.py
+    deps:
+    - output/prepareOutput/normalized.csv
+    - scripts/analyze.py
+    outs:
+    - output/analyzeOutput/
+  train_linear:
+    cmd: python scripts/train_linear.py
+    deps:
+    - preparedData
+    - scripts/train_linear.py
+    outs:
+    - models/linear_model.joblib
+    metrics:
+    - metrics_linear.json:
+        cache: false

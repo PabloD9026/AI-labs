@@ -1,0 +1,20 @@
+cmd: python scripts/train_linear.py
+deps:
+- path: preparedData
+  hash: md5
+  md5: 59fe834dd831c236005ad91310cb4bf4.dir
+  size: 4023195
+  nfiles: 5
+- path: scripts/train_linear.py
+  hash: md5
+  md5: f0803ec6c39039763ad8c8f4012f3f47
+  size: 1664
+outs:
+- path: metrics_linear.json
+  hash: md5
+  md5: 89f3652ba067d818d582abd0f9120e91
+  size: 84
+- path: models/linear_model.joblib
+  hash: md5
+  md5: b1c941e08090e30a52cda25c4f034e25
+  size: 977
