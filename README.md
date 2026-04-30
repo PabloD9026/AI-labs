@@ -101,15 +101,6 @@ X_scaled = (X - X_min) / (X_max - X_min)
 - **Типы данных и пропуски**  
   Все 8 столбцов имеют тип `float64`. Пропущенные значения отсутствуют (0 в каждом столбце).
 
-0 name 11875 non-null float64
-1 year 11875 non-null float64
-2 selling_price 11875 non-null float64
-3 km_driven 11875 non-null float64
-4 fuel 11875 non-null float64
-5 seller_type 11875 non-null float64
-6 transmission 11875 non-null float64
-7 owner 11875 non-null float64
-
 
 - **Краткая статистика**  
 
