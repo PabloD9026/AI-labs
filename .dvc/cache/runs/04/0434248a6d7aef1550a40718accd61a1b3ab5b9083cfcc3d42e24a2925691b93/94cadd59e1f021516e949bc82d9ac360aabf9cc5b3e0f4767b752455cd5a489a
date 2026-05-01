@@ -1,0 +1,64 @@
+cmd: python scripts/train_nn.py
+deps:
+- path: output/prepareOutput/test.csv
+  hash: md5
+  md5: a057dc3e36eaa4f53df2590f5fd60b81
+  size: 262691
+- path: output/prepareOutput/train.csv
+  hash: md5
+  md5: 2d335919644e043e5a7246f96070d883
+  size: 1051580
+- path: scripts/train_nn.py
+  hash: md5
+  md5: f1e2695cde6a10918e71ca0a12f7a152
+  size: 3748
+params:
+  params.yaml:
+    train_nn:
+      output_base_dir: models/
+      train_data_dir: output/prepareOutput/train.csv
+      test_data_dir: output/prepareOutput/test.csv
+      images_dir: images/NN/
+      log_dir: logs/fit/
+      amount_of_hidden_layers: 5
+      neurons_l1: 256
+      neurons_l2: 128
+      neurons_l3: 64
+      neurons_l4: 20
+      neurons_l5: 10
+      activation_l1: relu
+      activation_l2: relu
+      activation_l3: relu
+      activation_l4: relu
+      activation_l5: relu
+      epochs: 25
+      batch_size: 32
+      optimizer: adam
+      learning_rate: 0.001
+      loss_function: mse
+      validation_split: 0.2
+      dropout_rate: 0.3
+      kernel_initializer: he_normal
+      patience: 5
+outs:
+- path: images/NN/learning_curve.png
+  hash: md5
+  md5: 3af9c597ac82060adca8c1da0c9e2b94
+  size: 21845
+- path: images/NN/weight_histograms.png
+  hash: md5
+  md5: bab33b445196613062a8eac015c5b4d0
+  size: 41898
+- path: logs/fit/
+  hash: md5
+  md5: c851892ed3d0cc3fc8f7e7dbacfb417b.dir
+  size: 142291
+  nfiles: 2
+- path: models/metrics_nn.json
+  hash: md5
+  md5: d59c2aec9360e7dd3b1e24f4014fde24
+  size: 106
+- path: models/nn_model.h5
+  hash: md5
+  md5: 93296c713c675feebdec8924104725b0
+  size: 593936

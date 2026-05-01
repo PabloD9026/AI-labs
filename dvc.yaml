@@ -1,4 +1,5 @@
 stages:
+  # ========== Prepare Data ===================
   prepare:
     cmd: python scripts/prepare.py
     deps:
@@ -6,22 +7,137 @@ stages:
     - datasets/Car_data.csv
     - datasets/Car_details_v3.csv
     - scripts/prepare.py
+    params:
+    - prepare.output_base_dir
+    - prepare.raw_data
+    - prepare.merged_data_dir
+    - prepare.encoded_data_dir
+    - prepare.normalized_data_dir
+    - prepare.train_data_dir
+    - prepare.test_data_dir
     outs:
-    - output/prepareOutput/
+    - output/prepareOutput/encoded.csv
+    - output/prepareOutput/normalized.csv
+    - output/prepareOutput/merged.csv
+    - output/prepareOutput/test.csv
+    - output/prepareOutput/train.csv
+  
+  # ========== Analyze Data ===================
   analyzeData:
     cmd: python scripts/analyze.py
     deps:
     - output/prepareOutput/normalized.csv
     - scripts/analyze.py
+    params:
+    - analyzeData.output_base_dir
+    - analyzeData.normalized_data_dir
     outs:
     - output/analyzeOutput/
+  
+  # =========== Train Linear Regression Model ===================
   train_linear:
     cmd: python scripts/train_linear.py
     deps:
-    - preparedData
+    - output/prepareOutput/test.csv
+    - output/prepareOutput/train.csv
     - scripts/train_linear.py
+    params:
+    - train_linear.output_base_dir
+    - train_linear.train_data_dir
+    - train_linear.test_data_dir
     outs:
     - models/linear_model.joblib
     metrics:
-    - metrics_linear.json:
+    - models/metrics_linear.json:
+        cache: false
+
+# =========== Train Decision Tree Model ===================
+  train_tree:
+    cmd: python scripts/train_tree.py
+    deps:
+    - output/prepareOutput/test.csv
+    - output/prepareOutput/train.csv
+    - scripts/train_tree.py
+    params:
+    - train_tree.output_base_dir
+    - train_tree.train_data_dir
+    - train_tree.test_data_dir
+    - train_tree.criterion
+    - train_tree.max_depth
+    - train_tree.min_samples_split
+    - train_tree.min_samples_leaf
+    outs:
+    - models/tree_model.joblib
+    - images/DecisionTree/Tree_model_full.png
+    - images/DecisionTree/Tree_model_shallow.png
+    - images/DecisionTree/Feature_importance.png
+    metrics:
+    - models/metrics_tree.json:
+        cache: false
+
+
+# =========== Train CatBoost Model ===================
+  train_catboost:
+    cmd: python scripts/train_catboost.py
+    deps:
+    - output/prepareOutput/test.csv
+    - output/prepareOutput/train.csv
+    - scripts/train_catboost.py
+    params:
+    - train_catboost.output_base_dir
+    - train_catboost.train_data_dir
+    - train_catboost.test_data_dir
+    - train_catboost.iterations
+    - train_catboost.learning_rate
+    - train_catboost.depth
+    - train_catboost.l2_leaf_reg
+    - train_catboost.loss_function
+    outs:
+    - models/catboost_model.joblib
+    - images/CatBoost/Feature_importance.png
+    metrics:
+    - models/metrics_catboost.json:
+        cache: false
+
+# =========== Train XGBoost Model ===================
+  train_xgboost:
+    cmd: python scripts/train_xgboost.py
+    deps:
+    - output/prepareOutput/test.csv
+    - output/prepareOutput/train.csv
+    - scripts/train_xgboost.py
+    params:
+    - train_xgboost.output_base_dir
+    - train_xgboost.train_data_dir
+    - train_xgboost.test_data_dir
+    - train_xgboost.images_dir
+    - train_xgboost.n_estimators
+    - train_xgboost.learning_rate
+    - train_xgboost.max_depth
+    - train_xgboost.subsample
+    - train_xgboost.colsample_bytree
+    outs:
+    - models/xgboost_model.joblib
+    - images/XGBoost/Feature_importance.png
+    metrics:
+    - models/metrics_xgboost.json:
+        cache: false
+
+
+# =========== Train Neural Network ===================
+  train_nn:
+    cmd: python scripts/train_nn.py
+    deps:
+    - output/prepareOutput/test.csv
+    - output/prepareOutput/train.csv
+    - scripts/train_nn.py
+    params:
+    - train_nn
+    outs:
+    - models/nn_model.h5
+    - images/NN/learning_curve.png
+    - images/NN/weight_histograms.png
+    - logs/fit/
+    metrics:
+    - models/metrics_nn.json:
         cache: false

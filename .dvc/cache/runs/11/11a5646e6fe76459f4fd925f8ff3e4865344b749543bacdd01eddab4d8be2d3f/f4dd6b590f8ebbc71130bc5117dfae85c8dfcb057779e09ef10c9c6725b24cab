@@ -1,0 +1,44 @@
+cmd: python scripts/train_tree.py
+deps:
+- path: output/prepareOutput/test.csv
+  hash: md5
+  md5: a057dc3e36eaa4f53df2590f5fd60b81
+  size: 262691
+- path: output/prepareOutput/train.csv
+  hash: md5
+  md5: 2d335919644e043e5a7246f96070d883
+  size: 1051580
+- path: scripts/train_tree.py
+  hash: md5
+  md5: 66a5fcc717d7189de122610f3e3a2284
+  size: 3199
+params:
+  params.yaml:
+    train_tree.criterion: squared_error
+    train_tree.max_depth: 8
+    train_tree.min_samples_leaf: 2
+    train_tree.min_samples_split: 3
+    train_tree.output_base_dir: models/
+    train_tree.test_data_dir: output/prepareOutput/test.csv
+    train_tree.train_data_dir: output/prepareOutput/train.csv
+outs:
+- path: images/DecisionTree/Feature_importance.png
+  hash: md5
+  md5: 8ad62fc9f568000ecb41b5f62cb4914a
+  size: 19302
+- path: images/DecisionTree/Tree_model_full.png
+  hash: md5
+  md5: 6e66bacc18b0bec3a8f7960c75998d17
+  size: 549834
+- path: images/DecisionTree/Tree_model_shallow.png
+  hash: md5
+  md5: f5fec62b65e954158660c72ea5c6b3a2
+  size: 185114
+- path: models/metrics_tree.json
+  hash: md5
+  md5: 0c43b995303ff8087129db8f8212a044
+  size: 103
+- path: models/tree_model.joblib
+  hash: md5
+  md5: 752e5dbec86bc42023cd396f7d1ed2fb
+  size: 29617

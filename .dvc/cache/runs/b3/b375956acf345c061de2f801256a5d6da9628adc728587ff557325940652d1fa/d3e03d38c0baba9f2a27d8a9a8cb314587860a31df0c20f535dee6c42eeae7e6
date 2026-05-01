@@ -1,0 +1,20 @@
+cmd: python scripts/analyze.py
+deps:
+- path: output/prepareOutput/normalized.csv
+  hash: md5
+  md5: 24e715c55fb6517672a668d9fdcc30b6
+  size: 1314200
+- path: scripts/analyze.py
+  hash: md5
+  md5: 5dd66d91ac2614ad84f2939ef474c74b
+  size: 1255
+params:
+  params.yaml:
+    analyzeData.normalized_data_dir: output/prepareOutput/normalized.csv
+    analyzeData.output_base_dir: output/analyzeOutput/
+outs:
+- path: output/analyzeOutput/
+  hash: md5
+  md5: 9f275cbf3db446b0d46eea30ae6f71d8.dir
+  size: 2398
+  nfiles: 1

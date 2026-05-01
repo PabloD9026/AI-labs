@@ -4,10 +4,20 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os
+import yaml
 
-os.makedirs('output/analyzeOutput', exist_ok=True)
+with open("params.yaml", "r") as f:
+    params = yaml.safe_load(f)
 
-df = pd.read_csv('output/prepareOutput/normalized.csv')
+analyze_cfg = params["analyzeData"]
+
+# Extract paths
+output_base_dir = analyze_cfg["output_base_dir"]
+normalized_data_dir = analyze_cfg["normalized_data_dir"]
+
+os.makedirs(output_base_dir, exist_ok=True)
+
+df = pd.read_csv(normalized_data_dir)
 
 # Encode categorical text into numbers so we can calculate correlations
 encoder = LabelEncoder()
@@ -27,4 +37,4 @@ numeric_df = df_encoded.select_dtypes(include=[np.number])
 sns.heatmap(numeric_df.corr(), annot=True, cmap='coolwarm', fmt=".2f")
 plt.title("Correlation Matrix")
 plt.show()
-plt.savefig('output/analyzeOutput/correlation_heatmap.png')
+plt.savefig(os.path.join(output_base_dir, 'correlation_heatmap.png'))

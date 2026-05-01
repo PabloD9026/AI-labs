@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="769pt" height="116pt" viewBox="0.00 0.00 769.00 116.00">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
+<polygon fill="white" stroke="none" points="-4,4 -4,-112 764.97,-112 764.97,4 -4,4"/>
+<!-- prepare -->
+<g id="node1" class="node">
+<title>prepare</title>
+<ellipse fill="none" stroke="black" cx="378.75" cy="-90" rx="39.98" ry="18"/>
+<text xml:space="preserve" text-anchor="middle" x="378.75" y="-85.8" font-family="Times,serif" font-size="14.00">prepare</text>
+</g>
+<!-- analyzeData -->
+<g id="node2" class="node">
+<title>analyzeData</title>
+<ellipse fill="none" stroke="black" cx="58.75" cy="-18" rx="58.75" ry="18"/>
+<text xml:space="preserve" text-anchor="middle" x="58.75" y="-13.8" font-family="Times,serif" font-size="14.00">analyzeData</text>
+</g>
+<!-- prepare&#45;&gt;analyzeData -->
+<g id="edge1" class="edge">
+<title>prepare-&gt;analyzeData</title>
+<path fill="none" stroke="black" d="M342.62,-81.93C293.43,-72.18 202.7,-53.81 125.75,-36 121.78,-35.08 117.67,-34.1 113.55,-33.1"/>
+<polygon fill="black" stroke="black" points="114.67,-29.78 104.12,-30.78 113,-36.57 114.67,-29.78"/>
+</g>
+<!-- train_linear -->
+<g id="node3" class="node">
+<title>train_linear</title>
+<ellipse fill="none" stroke="black" cx="190.75" cy="-18" rx="55.54" ry="18"/>
+<text xml:space="preserve" text-anchor="middle" x="190.75" y="-13.8" font-family="Times,serif" font-size="14.00">train_linear</text>
+</g>
+<!-- prepare&#45;&gt;train_linear -->
+<g id="edge2" class="edge">
+<title>prepare-&gt;train_linear</title>
+<path fill="none" stroke="black" d="M348.55,-77.75C318.35,-66.51 271.53,-49.08 236.72,-36.12"/>
+<polygon fill="black" stroke="black" points="238.35,-32.99 227.75,-32.78 235.9,-39.55 238.35,-32.99"/>
+</g>
+<!-- train_tree -->
+<g id="node4" class="node">
+<title>train_tree</title>
+<ellipse fill="none" stroke="black" cx="312.75" cy="-18" rx="48.03" ry="18"/>
+<text xml:space="preserve" text-anchor="middle" x="312.75" y="-13.8" font-family="Times,serif" font-size="14.00">train_tree</text>
+</g>
+<!-- prepare&#45;&gt;train_tree -->
+<g id="edge3" class="edge">
+<title>prepare-&gt;train_tree</title>
+<path fill="none" stroke="black" d="M363.77,-73.12C355.54,-64.38 345.14,-53.35 335.88,-43.54"/>
+<polygon fill="black" stroke="black" points="338.57,-41.28 329.16,-36.41 333.48,-46.09 338.57,-41.28"/>
+</g>
+<!-- train_catboost -->
+<g id="node5" class="node">
+<title>train_catboost</title>
+<ellipse fill="none" stroke="black" cx="444.75" cy="-18" rx="65.74" ry="18"/>
+<text xml:space="preserve" text-anchor="middle" x="444.75" y="-13.8" font-family="Times,serif" font-size="14.00">train_catboost</text>
+</g>
+<!-- prepare&#45;&gt;train_catboost -->
+<g id="edge4" class="edge">
+<title>prepare-&gt;train_catboost</title>
+<path fill="none" stroke="black" d="M393.73,-73.12C401.85,-64.51 412.06,-53.67 421.22,-43.96"/>
+<polygon fill="black" stroke="black" points="423.56,-46.58 427.87,-36.9 418.47,-41.77 423.56,-46.58"/>
+</g>
+<!-- train_xgboost -->
+<g id="node6" class="node">
+<title>train_xgboost</title>
+<ellipse fill="none" stroke="black" cx="592.75" cy="-18" rx="64.14" ry="18"/>
+<text xml:space="preserve" text-anchor="middle" x="592.75" y="-13.8" font-family="Times,serif" font-size="14.00">train_xgboost</text>
+</g>
+<!-- prepare&#45;&gt;train_xgboost -->
+<g id="edge5" class="edge">
+<title>prepare-&gt;train_xgboost</title>
+<path fill="none" stroke="black" d="M410.33,-78.67C444.83,-67.38 500.63,-49.13 541.44,-35.78"/>
+<polygon fill="black" stroke="black" points="542.41,-39.15 550.82,-32.71 540.23,-32.5 542.41,-39.15"/>
+</g>
+<!-- train_nn -->
+<g id="node7" class="node">
+<title>train_nn</title>
+<ellipse fill="none" stroke="black" cx="717.75" cy="-18" rx="43.22" ry="18"/>
+<text xml:space="preserve" text-anchor="middle" x="717.75" y="-13.8" font-family="Times,serif" font-size="14.00">train_nn</text>
+</g>
+<!-- prepare&#45;&gt;train_nn -->
+<g id="edge6" class="edge">
+<title>prepare-&gt;train_nn</title>
+<path fill="none" stroke="black" d="M416.71,-83.64C471.97,-75.47 577.61,-58.44 665.75,-36 668.67,-35.26 671.66,-34.44 674.67,-33.57"/>
+<polygon fill="black" stroke="black" points="675.49,-36.98 684.04,-30.72 673.46,-30.28 675.49,-36.98"/>
+</g>
+</g>
+</svg>

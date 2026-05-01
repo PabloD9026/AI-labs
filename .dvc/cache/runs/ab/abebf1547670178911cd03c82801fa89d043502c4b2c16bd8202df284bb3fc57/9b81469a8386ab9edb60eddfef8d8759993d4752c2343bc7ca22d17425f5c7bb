@@ -1,0 +1,38 @@
+cmd: python scripts/train_xgboost.py
+deps:
+- path: output/prepareOutput/test.csv
+  hash: md5
+  md5: a057dc3e36eaa4f53df2590f5fd60b81
+  size: 262691
+- path: output/prepareOutput/train.csv
+  hash: md5
+  md5: 2d335919644e043e5a7246f96070d883
+  size: 1051580
+- path: scripts/train_xgboost.py
+  hash: md5
+  md5: 38ed97ff73aa4523a61b8541ba922f01
+  size: 2313
+params:
+  params.yaml:
+    train_xgboost.colsample_bytree: 0.8
+    train_xgboost.images_dir: images/XGBoost/
+    train_xgboost.learning_rate: 0.1
+    train_xgboost.max_depth: 8
+    train_xgboost.n_estimators: 100
+    train_xgboost.output_base_dir: models/
+    train_xgboost.subsample: 0.8
+    train_xgboost.test_data_dir: output/prepareOutput/test.csv
+    train_xgboost.train_data_dir: output/prepareOutput/train.csv
+outs:
+- path: images/XGBoost/Feature_importance.png
+  hash: md5
+  md5: a07f14c781301031ef664a83f2e11ca4
+  size: 20433
+- path: models/metrics_xgboost.json
+  hash: md5
+  md5: a6ff5ccadbda67d029eeec7b88f03526
+  size: 102
+- path: models/xgboost_model.joblib
+  hash: md5
+  md5: 9bc9b3faaac625b2772c6901de0df491
+  size: 1001976

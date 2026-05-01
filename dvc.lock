@@ -17,25 +17,56 @@ stages:
       size: 976332
     - path: scripts/prepare.py
       hash: md5
-      md5: c019457a82a88b69b358a551f5afd796
-      size: 2881
+      md5: 5afcf9cb8f17dc322473baeec7c4e608
+      size: 3262
+    params:
+      params.yaml:
+        prepare.encoded_data_dir: output/prepareOutput/encoded.csv
+        prepare.merged_data_dir: output/prepareOutput/merged.csv
+        prepare.normalized_data_dir: output/prepareOutput/normalized.csv
+        prepare.output_base_dir: output/prepareOutput
+        prepare.raw_data:
+        - datasets/Car_data.csv
+        - datasets/CAR_DETAILS_FROM_CAR_DEKHO.csv
+        - datasets/Car_details_v3.csv
+        prepare.test_data_dir: output/prepareOutput/test.csv
+        prepare.train_data_dir: output/prepareOutput/train.csv
     outs:
-    - path: output/prepareOutput/
+    - path: output/prepareOutput/encoded.csv
       hash: md5
-      md5: 59fe834dd831c236005ad91310cb4bf4.dir
-      size: 4023195
-      nfiles: 5
+      md5: 89c32881904b1b05b4af4ba268100241
+      size: 400640
+    - path: output/prepareOutput/merged.csv
+      hash: md5
+      md5: 0af65990b8adf7cfad10286e5cb46d42
+      size: 994084
+    - path: output/prepareOutput/normalized.csv
+      hash: md5
+      md5: 24e715c55fb6517672a668d9fdcc30b6
+      size: 1314200
+    - path: output/prepareOutput/test.csv
+      hash: md5
+      md5: a057dc3e36eaa4f53df2590f5fd60b81
+      size: 262691
+    - path: output/prepareOutput/train.csv
+      hash: md5
+      md5: 2d335919644e043e5a7246f96070d883
+      size: 1051580
   analyzeData:
     cmd: python scripts/analyze.py
     deps:
     - path: output/prepareOutput/normalized.csv
       hash: md5
-      md5: e93122d9e0bf9206ae4c053bac310d41
+      md5: 24e715c55fb6517672a668d9fdcc30b6
       size: 1314200
     - path: scripts/analyze.py
       hash: md5
-      md5: 3b203540145a69bc1009c0dc92bfb529
-      size: 1020
+      md5: 5dd66d91ac2614ad84f2939ef474c74b
+      size: 1255
+    params:
+      params.yaml:
+        analyzeData.normalized_data_dir: output/prepareOutput/normalized.csv
+        analyzeData.output_base_dir: output/analyzeOutput/
     outs:
     - path: output/analyzeOutput/
       hash: md5
@@ -45,21 +76,216 @@ stages:
   train_linear:
     cmd: python scripts/train_linear.py
     deps:
-    - path: preparedData
+    - path: output/prepareOutput/test.csv
       hash: md5
-      md5: 59fe834dd831c236005ad91310cb4bf4.dir
-      size: 4023195
-      nfiles: 5
+      md5: a057dc3e36eaa4f53df2590f5fd60b81
+      size: 262691
+    - path: output/prepareOutput/train.csv
+      hash: md5
+      md5: 2d335919644e043e5a7246f96070d883
+      size: 1051580
     - path: scripts/train_linear.py
       hash: md5
-      md5: f0803ec6c39039763ad8c8f4012f3f47
-      size: 1664
+      md5: 97665291b92b121ddeeb6e0bf156e24f
+      size: 1889
+    params:
+      params.yaml:
+        train_linear.output_base_dir: models/
+        train_linear.test_data_dir: output/prepareOutput/test.csv
+        train_linear.train_data_dir: output/prepareOutput/train.csv
     outs:
-    - path: metrics_linear.json
-      hash: md5
-      md5: 89f3652ba067d818d582abd0f9120e91
-      size: 84
     - path: models/linear_model.joblib
       hash: md5
-      md5: b1c941e08090e30a52cda25c4f034e25
+      md5: 209ff10cb4a8a58bdc963c37a121ca9e
       size: 977
+    - path: models/metrics_linear.json
+      hash: md5
+      md5: f64f4ee8b1d1cd3f099a442da1179462
+      size: 84
+  train_tree:
+    cmd: python scripts/train_tree.py
+    deps:
+    - path: output/prepareOutput/test.csv
+      hash: md5
+      md5: a057dc3e36eaa4f53df2590f5fd60b81
+      size: 262691
+    - path: output/prepareOutput/train.csv
+      hash: md5
+      md5: 2d335919644e043e5a7246f96070d883
+      size: 1051580
+    - path: scripts/train_tree.py
+      hash: md5
+      md5: 66a5fcc717d7189de122610f3e3a2284
+      size: 3199
+    params:
+      params.yaml:
+        train_tree.criterion: squared_error
+        train_tree.max_depth: 8
+        train_tree.min_samples_leaf: 2
+        train_tree.min_samples_split: 3
+        train_tree.output_base_dir: models/
+        train_tree.test_data_dir: output/prepareOutput/test.csv
+        train_tree.train_data_dir: output/prepareOutput/train.csv
+    outs:
+    - path: images/DecisionTree/Feature_importance.png
+      hash: md5
+      md5: 8ad62fc9f568000ecb41b5f62cb4914a
+      size: 19302
+    - path: images/DecisionTree/Tree_model_full.png
+      hash: md5
+      md5: 6e66bacc18b0bec3a8f7960c75998d17
+      size: 549834
+    - path: images/DecisionTree/Tree_model_shallow.png
+      hash: md5
+      md5: f5fec62b65e954158660c72ea5c6b3a2
+      size: 185114
+    - path: models/metrics_tree.json
+      hash: md5
+      md5: 0c43b995303ff8087129db8f8212a044
+      size: 103
+    - path: models/tree_model.joblib
+      hash: md5
+      md5: 752e5dbec86bc42023cd396f7d1ed2fb
+      size: 29617
+  train_catboost:
+    cmd: python scripts/train_catboost.py
+    deps:
+    - path: output/prepareOutput/test.csv
+      hash: md5
+      md5: a057dc3e36eaa4f53df2590f5fd60b81
+      size: 262691
+    - path: output/prepareOutput/train.csv
+      hash: md5
+      md5: 2d335919644e043e5a7246f96070d883
+      size: 1051580
+    - path: scripts/train_catboost.py
+      hash: md5
+      md5: e9a2073ea94464f3649af6ee47a91028
+      size: 2306
+    params:
+      params.yaml:
+        train_catboost.depth: 8
+        train_catboost.iterations: 100
+        train_catboost.l2_leaf_reg: 3
+        train_catboost.learning_rate: 0.1
+        train_catboost.loss_function: RMSE
+        train_catboost.output_base_dir: models/
+        train_catboost.test_data_dir: output/prepareOutput/test.csv
+        train_catboost.train_data_dir: output/prepareOutput/train.csv
+    outs:
+    - path: images/CatBoost/Feature_importance.png
+      hash: md5
+      md5: 548c11e8d02bedc9f81206cedd42e4a4
+      size: 20100
+    - path: models/catboost_model.joblib
+      hash: md5
+      md5: 32807f53c37580960c1e8d1d75d047c0
+      size: 414330
+    - path: models/metrics_catboost.json
+      hash: md5
+      md5: b168cc89ec62de7285a179c795247166
+      size: 103
+  train_xgboost:
+    cmd: python scripts/train_xgboost.py
+    deps:
+    - path: output/prepareOutput/test.csv
+      hash: md5
+      md5: a057dc3e36eaa4f53df2590f5fd60b81
+      size: 262691
+    - path: output/prepareOutput/train.csv
+      hash: md5
+      md5: 2d335919644e043e5a7246f96070d883
+      size: 1051580
+    - path: scripts/train_xgboost.py
+      hash: md5
+      md5: 38ed97ff73aa4523a61b8541ba922f01
+      size: 2313
+    params:
+      params.yaml:
+        train_xgboost.colsample_bytree: 0.8
+        train_xgboost.images_dir: images/XGBoost/
+        train_xgboost.learning_rate: 0.1
+        train_xgboost.max_depth: 8
+        train_xgboost.n_estimators: 100
+        train_xgboost.output_base_dir: models/
+        train_xgboost.subsample: 0.8
+        train_xgboost.test_data_dir: output/prepareOutput/test.csv
+        train_xgboost.train_data_dir: output/prepareOutput/train.csv
+    outs:
+    - path: images/XGBoost/Feature_importance.png
+      hash: md5
+      md5: a07f14c781301031ef664a83f2e11ca4
+      size: 20433
+    - path: models/metrics_xgboost.json
+      hash: md5
+      md5: a6ff5ccadbda67d029eeec7b88f03526
+      size: 102
+    - path: models/xgboost_model.joblib
+      hash: md5
+      md5: 9bc9b3faaac625b2772c6901de0df491
+      size: 1001976
+  train_nn:
+    cmd: python scripts/train_nn.py
+    deps:
+    - path: output/prepareOutput/test.csv
+      hash: md5
+      md5: a057dc3e36eaa4f53df2590f5fd60b81
+      size: 262691
+    - path: output/prepareOutput/train.csv
+      hash: md5
+      md5: 2d335919644e043e5a7246f96070d883
+      size: 1051580
+    - path: scripts/train_nn.py
+      hash: md5
+      md5: e77363e123bfec4370d957631a0766bd
+      size: 3748
+    params:
+      params.yaml:
+        train_nn:
+          output_base_dir: models/
+          train_data_dir: output/prepareOutput/train.csv
+          test_data_dir: output/prepareOutput/test.csv
+          images_dir: images/NN/
+          log_dir: logs/fit/
+          amount_of_hidden_layers: 5
+          neurons_l1: 512
+          neurons_l2: 512
+          neurons_l3: 256
+          neurons_l4: 64
+          neurons_l5: 16
+          activation_l1: relu
+          activation_l2: relu
+          activation_l3: relu
+          activation_l4: relu
+          activation_l5: relu
+          epochs: 50
+          batch_size: 16
+          optimizer: adam
+          learning_rate: 0.001
+          loss_function: mse
+          validation_split: 0.2
+          dropout_rate: 0.3
+          kernel_initializer: he_normal
+          patience: 20
+    outs:
+    - path: images/NN/learning_curve.png
+      hash: md5
+      md5: 68f35b26684128f2cd3b423bd5417829
+      size: 30134
+    - path: images/NN/weight_histograms.png
+      hash: md5
+      md5: f4f0009804ee5b966bbeaeef068a84ec
+      size: 43076
+    - path: logs/fit/
+      hash: md5
+      md5: 33866b06ad48179cfaf714a675be914e.dir
+      size: 526903
+      nfiles: 2
+    - path: models/metrics_nn.json
+      hash: md5
+      md5: 08ef64dc21819b0120590ebef1164466
+      size: 101
+    - path: models/nn_model.h5
+      hash: md5
+      md5: d5e9bdd5d2b3a955a78564d5924a5ead
+      size: 5045024

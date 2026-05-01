@@ -1,0 +1,32 @@
+cmd: python scripts/train_tree.py
+deps:
+- path: output/prepareOutput/test.csv
+  hash: md5
+  md5: a057dc3e36eaa4f53df2590f5fd60b81
+  size: 262691
+- path: output/prepareOutput/train.csv
+  hash: md5
+  md5: 2d335919644e043e5a7246f96070d883
+  size: 1051580
+- path: scripts/train_tree.py
+  hash: md5
+  md5: ff0c646ebcd1aaa4f3be6d6d627dda2d
+  size: 2097
+params:
+  params.yaml:
+    train_tree.criterion: squared_error
+    train_tree.max_depth: 8
+    train_tree.min_samples_leaf: 2
+    train_tree.min_samples_split: 3
+    train_tree.output_base_dir: models/
+    train_tree.test_data_dir: output/prepareOutput/test.csv
+    train_tree.train_data_dir: output/prepareOutput/train.csv
+outs:
+- path: models/metrics_tree.json
+  hash: md5
+  md5: 2267dda4b9ab6f1d9bb6c52701077ee9
+  size: 85
+- path: models/tree_model.joblib
+  hash: md5
+  md5: 752e5dbec86bc42023cd396f7d1ed2fb
+  size: 29617

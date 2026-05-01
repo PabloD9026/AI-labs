@@ -1,0 +1,28 @@
+cmd: python scripts/train_linear.py
+deps:
+- path: output/prepareOutput/test.csv
+  hash: md5
+  md5: a057dc3e36eaa4f53df2590f5fd60b81
+  size: 262691
+- path: output/prepareOutput/train.csv
+  hash: md5
+  md5: 2d335919644e043e5a7246f96070d883
+  size: 1051580
+- path: scripts/train_linear.py
+  hash: md5
+  md5: 97665291b92b121ddeeb6e0bf156e24f
+  size: 1889
+params:
+  params.yaml:
+    train_linear.output_base_dir: models/
+    train_linear.test_data_dir: output/prepareOutput/test.csv
+    train_linear.train_data_dir: output/prepareOutput/train.csv
+outs:
+- path: models/linear_model.joblib
+  hash: md5
+  md5: 209ff10cb4a8a58bdc963c37a121ca9e
+  size: 977
+- path: models/metrics_linear.json
+  hash: md5
+  md5: f64f4ee8b1d1cd3f099a442da1179462
+  size: 84

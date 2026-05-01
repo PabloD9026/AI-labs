@@ -5,12 +5,24 @@ import os
 import json
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+import yaml
+
+with open("params.yaml", "r") as f:
+    params = yaml.safe_load(f)
+
+analyze_cfg = params["train_linear"]
+
+# Extract paths
+output_base_dir = analyze_cfg["output_base_dir"]
+train_data_dir = analyze_cfg["train_data_dir"]
+test_data_dir = analyze_cfg["test_data_dir"]
+
 
 # 1. Setup paths
-train_path = 'output/prepareOutput/train.csv'
-test_path = 'output/prepareOutput/test.csv'
-model_dir = 'models'
-os.makedirs(model_dir, exist_ok=True)
+train_path = train_data_dir
+test_path = test_data_dir
+
+os.makedirs(output_base_dir, exist_ok=True)
 
 # 2. Load data
 # We assume the data is already encoded/normalized from your prepare script
@@ -51,9 +63,7 @@ print("\n--- Metrics ---")
 print(json.dumps(metrics, indent=4))
 
 # 6. Save Model and Metrics
-joblib.dump(model, os.path.join(model_dir, 'linear_model.joblib'))
+joblib.dump(model, os.path.join(output_base_dir, 'linear_model.joblib'))
 
-with open('metrics_linear.json', 'w') as f:
+with open(os.path.join(output_base_dir, 'metrics_linear.json'), 'w') as f:
     json.dump(metrics, f)
-
-print("\nModel saved to models/linear_model.joblib")

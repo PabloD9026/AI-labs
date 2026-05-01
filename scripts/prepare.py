@@ -1,13 +1,28 @@
 # Run once. Merge all datasets into a single file with a consistent schema. This will create 'merged.csv' in the same directory.
 import pandas as pd
 import os
+import yaml
 
-os.makedirs('output/prepareOutput', exist_ok=True)
+with open("params.yaml", "r") as f:
+    params = yaml.safe_load(f)
+
+prepare_cfg = params["prepare"]
+
+# Extract paths
+output_base_dir = prepare_cfg["output_base_dir"]
+raw_data_files = prepare_cfg["raw_data"]
+merged_data_dir = prepare_cfg["merged_data_dir"]
+encoded_data_dir = prepare_cfg["encoded_data_dir"]
+normalized_data_dir = prepare_cfg["normalized_data_dir"]
+train_data_dir = prepare_cfg["train_data_dir"]
+test_data_dir = prepare_cfg["test_data_dir"]
+
+os.makedirs(output_base_dir, exist_ok=True)
 
 # Load datasets
-df = pd.read_csv('datasets/Car_data.csv')
-df1 = pd.read_csv('datasets/Car_details_v3.csv')
-df2 = pd.read_csv('datasets/CAR_DETAILS_FROM_CAR_DEKHO.csv')
+df = pd.read_csv(raw_data_files[0])  # Assuming the first file is the main dataset to be merged with others
+df1 = pd.read_csv(raw_data_files[1])
+df2 = pd.read_csv(raw_data_files[2])
 
 # Rename columns in df to match df2's schema
 df_renamed = df.rename(columns={
@@ -32,9 +47,9 @@ df2_selected = df2[common_cols]   # df2 already has exactly these columns
 merged = pd.concat([df_renamed, df1_selected, df2_selected], ignore_index=True)
 
 # Export to the same directory
-merged.to_csv('output/prepareOutput/merged.csv', index=False)
+merged.to_csv(merged_data_dir, index=False)
 
-merged_df = pd.read_csv('output/prepareOutput/merged.csv')
+merged_df = pd.read_csv(merged_data_dir)
 print("Dataset shape:", merged_df.shape)
 
 # Encode categorical text into numbers so we can calculate correlations
@@ -53,7 +68,7 @@ for col in categorical_cols:
     label_encoders[col] = le
 
 # Save the encoded dataset
-df_encoded.to_csv('output/prepareOutput/encoded.csv', index=False)
+df_encoded.to_csv(encoded_data_dir, index=False)
 
 print("Dataset shape:", df_encoded.shape)
 
@@ -62,7 +77,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 
 # Load the encoded dataset
-encoded_df = pd.read_csv('output/prepareOutput/encoded.csv')
+encoded_df = pd.read_csv(encoded_data_dir)
 
 # Normalize all columns using Min-Max scaling
 scaler = MinMaxScaler()
@@ -72,12 +87,12 @@ normalized_data = scaler.fit_transform(encoded_df)
 normalized_df = pd.DataFrame(normalized_data, columns=encoded_df.columns)
 
 # Save the full normalized dataset
-normalized_df.to_csv('output/prepareOutput/normalized.csv', index=False)
+normalized_df.to_csv(normalized_data_dir, index=False)
 
 # Split into train and test sets (80% train, 20% test) with shuffling
 train_df, test_df = train_test_split(normalized_df, test_size=0.2, shuffle=True, random_state=42)
 
 # Save the splits
-train_df.to_csv('output/prepareOutput/train.csv', index=False)
-test_df.to_csv('output/prepareOutput/test.csv', index=False)
+train_df.to_csv(train_data_dir, index=False)
+test_df.to_csv(test_data_dir, index=False)
 

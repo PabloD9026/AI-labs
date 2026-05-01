@@ -1,0 +1,37 @@
+cmd: python scripts/train_catboost.py
+deps:
+- path: output/prepareOutput/test.csv
+  hash: md5
+  md5: a057dc3e36eaa4f53df2590f5fd60b81
+  size: 262691
+- path: output/prepareOutput/train.csv
+  hash: md5
+  md5: 2d335919644e043e5a7246f96070d883
+  size: 1051580
+- path: scripts/train_catboost.py
+  hash: md5
+  md5: e9a2073ea94464f3649af6ee47a91028
+  size: 2306
+params:
+  params.yaml:
+    train_catboost.depth: 8
+    train_catboost.iterations: 50
+    train_catboost.l2_leaf_reg: 3
+    train_catboost.learning_rate: 0.1
+    train_catboost.loss_function: RMSE
+    train_catboost.output_base_dir: models/
+    train_catboost.test_data_dir: output/prepareOutput/test.csv
+    train_catboost.train_data_dir: output/prepareOutput/train.csv
+outs:
+- path: images/CatBoost/Feature_importance.png
+  hash: md5
+  md5: bf9c93bdb8860dc687a0b2bd788a5578
+  size: 20098
+- path: models/catboost_model.joblib
+  hash: md5
+  md5: fd884ffbc16c6108f86c3c20553828bf
+  size: 212234
+- path: models/metrics_catboost.json
+  hash: md5
+  md5: 034093d723a1fc1d1912de1b5a9a0d1b
+  size: 102

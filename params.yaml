@@ -1,0 +1,88 @@
+prepare:
+  output_base_dir: output/prepareOutput
+  raw_data:
+    - datasets/Car_data.csv
+    - datasets/CAR_DETAILS_FROM_CAR_DEKHO.csv
+    - datasets/Car_details_v3.csv
+  merged_data_dir: output/prepareOutput/merged.csv
+  encoded_data_dir: output/prepareOutput/encoded.csv
+  normalized_data_dir: output/prepareOutput/normalized.csv
+  train_data_dir: output/prepareOutput/train.csv
+  test_data_dir: output/prepareOutput/test.csv
+
+analyzeData:
+  output_base_dir: output/analyzeOutput/
+  normalized_data_dir: output/prepareOutput/normalized.csv
+
+train_linear:
+  output_base_dir: models/
+  train_data_dir: output/prepareOutput/train.csv
+  test_data_dir: output/prepareOutput/test.csv
+
+train_tree:
+  output_base_dir: models/
+  images_dir: images/DecisionTree/
+  train_data_dir: output/prepareOutput/train.csv
+  test_data_dir: output/prepareOutput/test.csv
+  criterion: squared_error
+  max_depth: 8
+  min_samples_split: 3
+  min_samples_leaf: 2
+  output_levels: 3
+
+train_catboost:
+  output_base_dir: models/
+  train_data_dir: output/prepareOutput/train.csv
+  test_data_dir: output/prepareOutput/test.csv
+  images_dir: images/CatBoost/
+  iterations: 100
+  learning_rate: 0.1
+  depth: 8
+  l2_leaf_reg: 3
+  loss_function: RMSE
+
+train_xgboost:
+  output_base_dir: models/
+  train_data_dir: output/prepareOutput/train.csv
+  test_data_dir: output/prepareOutput/test.csv
+  images_dir: images/XGBoost/
+  n_estimators: 100
+  learning_rate: 0.1
+  max_depth: 8
+  subsample: 0.8
+  colsample_bytree: 0.8
+
+train_nn:
+  output_base_dir: models/
+  train_data_dir: output/prepareOutput/train.csv
+  test_data_dir: output/prepareOutput/test.csv
+  images_dir: images/NN/
+  log_dir: logs/fit/
+  
+  # 1. Layer Count
+  amount_of_hidden_layers: 5
+  
+  # 2-6. Neurons per layer
+  neurons_l1: 512
+  neurons_l2: 512
+  neurons_l3: 256
+  neurons_l4: 64
+  neurons_l5: 16
+  
+  # 7-11. Activation functions
+  activation_l1: relu
+  activation_l2: relu
+  activation_l3: relu
+  activation_l4: relu
+  activation_l5: relu
+
+  # 12-20. Top 9 important params
+  epochs: 50
+  batch_size: 16
+  optimizer: adam
+  learning_rate: 0.001
+  loss_function: mse
+  validation_split: 0.2
+  dropout_rate: 0.3
+  kernel_initializer: he_normal
+  patience: 20
