@@ -1,4 +1,4 @@
-# Тема
+<img width="634" height="187" alt="image" src="https://github.com/user-attachments/assets/37fc20b1-e6e6-4851-b5fb-089c05cb931b" /># Тема
 Методы искусственного интеллекта. EDA. Линейная регрессия. 
 Дерево решений. CatBoost. XGBoost. Нейронный сети (MLP)
 
@@ -159,7 +159,14 @@ X_scaled = (X - X_min) / (X_max - X_min)
 2. **Train**: Обучение пяти типов моделей (Linear, Tree, CatBoost, XGBoost, NN).
 3. **Evaluate**: Сбор метрик и построение графиков.
 
-Descion tree model:
+После того как pipeline был построен можно было запускать его при помощю команда
+`dvc repro`
+
+В процессе работы были обучены и протестированы следующие алгоритмы:
+Linear Regression: Базовая модель для оценки линейных зависимостей.
+Decision Tree: Модель дерева решений (построена визуализация первых узлов).
+
+
 
 <img width="1570" height="812" alt="Tree_model_shallow" src="https://github.com/user-attachments/assets/b15940d4-8c93-4662-9807-a9097ea9ae34" />
 
@@ -167,32 +174,34 @@ desicion tree feature importance
 
 <img width="1000" height="800" alt="Feature_importance" src="https://github.com/user-attachments/assets/dae57f34-dd15-4275-a8e4-7cb6fd4a8c0c" />
 
-catboost feature importance
+XGBoost: Градиентный бустинг над деревьями. Визуализирован Feature Importance.
 
 <img width="1000" height="800" alt="Feature_importance" src="https://github.com/user-attachments/assets/a4c9fa8c-fb83-4cdd-afbc-d6674bc1d83d" />
 
-XGboost feature importance
-
+ XGBoost: Градиентный бустинг над деревьями. Визуализирован Feature Importance.
 <img width="1000" height="800" alt="Feature_importance" src="https://github.com/user-attachments/assets/a3e241bd-370d-45bd-9533-7ab9b537996c" />
 
-Custom Neural Network learning curve
-
+Нейронная сеть (MLP): Полносвязная сеть, обученная с использованием логирования в TensorBoard.
 <img width="1000" height="500" alt="learning_curve" src="https://github.com/user-attachments/assets/21bcad6f-4922-4045-9d47-4e2ea7d6c651" />
 
-custom NN layer weights
-
+Весы для нейронной сети
 <img width="1500" height="400" alt="weight_histograms" src="https://github.com/user-attachments/assets/c81d19bd-8e19-4d84-9a3d-21c9ccac6b66" />
 
+Результаты моделирования
 
-Results 
+| Модель | MAE | MSE | R² |
+| :--- | :---: | :---: | :---: |
+| Linear Regression | 0.03063 | 0.00321 | 0.43015 |
+| Decision Tree | 0.01541 | 0.00120 | 0.78706 |
+| CatBoost | 0.01330 | 0.00083 | 0.85315 |
+| **XGBoost** | **0.00922** | **0.00056** | **0.89975** |
+| Neural Network (NN) | 0.02230 | 0.00161 | 0.71334 |
 
-Path                          MAE      MSE      R2
-models\metrics_linear.json    0.03063  0.00321  0.43015
-models\metrics_tree.json      0.01541  0.0012   0.78706
-models\metrics_catboost.json  0.0133   0.00083  0.85315
-models\metrics_xgboost.json   0.00922  0.00056  0.89975
-models\metrics_nn.json        0.0223   0.00161  0.71334
 
-VDC graph
+# Вывод
+В ходе выполнения лабораторных работ была реализована полная цепочка разработки ML-модели: от первичного анализа данных до сравнения сложных ансамблевых алгоритмов. 
+
+1. **Градиентный бустинг** (XGBoost, CatBoost) значительно превосходит классические методы и нейронную сеть на данном типе табличных данных.
+2. **DVC** позволил эффективно управлять версиями данных и стадиями обучения, обеспечивая легкое сравнение метрик между итерациями.
 
 <img width="1025" height="155" alt="graphviz" src="https://github.com/user-attachments/assets/b2c667fc-dad6-4812-b982-3f045d3a7cfc" />
