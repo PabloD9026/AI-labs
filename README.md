@@ -1,4 +1,4 @@
-<img width="634" height="187" alt="image" src="https://github.com/user-attachments/assets/37fc20b1-e6e6-4851-b5fb-089c05cb931b" /># Тема
+# Тема
 Методы искусственного интеллекта. EDA. Линейная регрессия. 
 Дерево решений. CatBoost. XGBoost. Нейронный сети (MLP)
 
