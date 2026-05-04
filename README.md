@@ -197,7 +197,7 @@ CatBoost — это метод градиентного бустинга, спе
 
 Благодаря этим решениям CatBoost обеспечивает высокое качество и стабильность без сложного подбора гиперпараметров.
 
-XGBoost: Градиентный бустинг над деревьями. Визуализирован Feature Importance.
+Catboost: Градиентный бустинг над деревьями. Визуализирован Feature Importance.
 
 <img width="1000" height="800" alt="Feature_importance" src="https://github.com/user-attachments/assets/a4c9fa8c-fb83-4cdd-afbc-d6674bc1d83d" />
 
