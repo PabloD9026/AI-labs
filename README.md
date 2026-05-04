@@ -144,6 +144,31 @@ X_scaled = (X - X_min) / (X_max - X_min)
 Корреляция с названием модели (name) очень слабая (около 0.05).
 Это означает, что само по себе название модели почти не объясняет цену – гораздо важнее её числовые характеристики (год, пробег и т.д.). Причина в том, что name после кодирования стал произвольным числом, не несущим информации о классе автомобиля (премиум/бюджетный). Для учёта модели потребовалось бы создавать отдельные категориальные признаки (one-hot encoding).
 
+Descion tree model:
+
+<img width="1570" height="812" alt="Tree_model_shallow" src="https://github.com/user-attachments/assets/b15940d4-8c93-4662-9807-a9097ea9ae34" />
+
+desicion tree feature importance
+
+<img width="1000" height="800" alt="Feature_importance" src="https://github.com/user-attachments/assets/dae57f34-dd15-4275-a8e4-7cb6fd4a8c0c" />
+
+catboost feature importance
+
+<img width="1000" height="800" alt="Feature_importance" src="https://github.com/user-attachments/assets/a4c9fa8c-fb83-4cdd-afbc-d6674bc1d83d" />
+
+XGboost feature importance
+
+<img width="1000" height="800" alt="Feature_importance" src="https://github.com/user-attachments/assets/a3e241bd-370d-45bd-9533-7ab9b537996c" />
+
+Custom Neural Network learning curve
+
+<img width="1000" height="500" alt="learning_curve" src="https://github.com/user-attachments/assets/21bcad6f-4922-4045-9d47-4e2ea7d6c651" />
+
+custom NN layer weights
+
+<img width="1500" height="400" alt="weight_histograms" src="https://github.com/user-attachments/assets/c81d19bd-8e19-4d84-9a3d-21c9ccac6b66" />
+
+
 Results 
 
 Path                          MAE      MSE      R2
@@ -152,3 +177,7 @@ models\metrics_tree.json      0.01541  0.0012   0.78706
 models\metrics_catboost.json  0.0133   0.00083  0.85315
 models\metrics_xgboost.json   0.00922  0.00056  0.89975
 models\metrics_nn.json        0.0223   0.00161  0.71334
+
+VDC graph
+
+<img width="1025" height="155" alt="graphviz" src="https://github.com/user-attachments/assets/b2c667fc-dad6-4812-b982-3f045d3a7cfc" />
