@@ -316,6 +316,12 @@ $$
 
 Нейронная сеть (MLP): Полносвязная сеть, обученная с использованием логирования в TensorBoard.
 <img width="1000" height="500" alt="learning_curve" src="https://github.com/user-attachments/assets/21bcad6f-4922-4045-9d47-4e2ea7d6c651" />
+<img width="1489" height="438" alt="image" src="https://github.com/user-attachments/assets/426c9369-2021-4e66-995e-849391fdd76b" />
+<img width="1484" height="426" alt="image" src="https://github.com/user-attachments/assets/0020a24a-e867-4d45-9f74-739ccf191d78" />
+<img width="1488" height="412" alt="image" src="https://github.com/user-attachments/assets/80a8aa51-6eeb-4850-8e15-26bc979d9adb" />
+<img width="1482" height="413" alt="image" src="https://github.com/user-attachments/assets/e7438e10-bffa-493d-a8b2-79d65eaab0e1" />
+<img width="1334" height="745" alt="image" src="https://github.com/user-attachments/assets/a2ce754e-9546-460d-9437-5739461b3332" />
+
 
 Весы для нейронной сети
 <img width="1500" height="400" alt="weight_histograms" src="https://github.com/user-attachments/assets/c81d19bd-8e19-4d84-9a3d-21c9ccac6b66" />
