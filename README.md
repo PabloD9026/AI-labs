@@ -326,6 +326,10 @@ $$
 Весы для нейронной сети
 <img width="1500" height="400" alt="weight_histograms" src="https://github.com/user-attachments/assets/c81d19bd-8e19-4d84-9a3d-21c9ccac6b66" />
 
+Арзитектура нейронной сети
+<img width="1722" height="113" alt="image" src="https://github.com/user-attachments/assets/c965ba77-4dff-4aa7-a5fb-a31f46467f2b" />
+
+
 Результаты моделирования
 
 | Метод | MAE | MSE | R² |
